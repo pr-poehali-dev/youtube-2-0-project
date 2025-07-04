@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -167,42 +168,43 @@ const Index = () => {
         {/* Video Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {videos.map((video) => (
-            <Card
-              key={video.id}
-              className="bg-[#1F1F1F] border-[#303030] overflow-hidden hover:bg-[#2A2A2A] transition-all duration-200 cursor-pointer group"
-            >
-              <div className="relative">
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
-                  {video.duration}
-                </div>
-              </div>
-              <CardContent className="p-4">
-                <div className="flex space-x-3">
-                  <Avatar className="w-10 h-10 flex-shrink-0">
-                    <AvatarImage src="/placeholder-avatar.jpg" />
-                    <AvatarFallback className="bg-red-600 text-white text-sm">
-                      {video.author[0]}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-white line-clamp-2 group-hover:text-gray-200">
-                      {video.title}
-                    </h3>
-                    <p className="text-sm text-gray-400 mt-1">{video.author}</p>
-                    <div className="flex items-center space-x-2 text-xs text-gray-500 mt-1">
-                      <span>{video.views} просмотров</span>
-                      <span>•</span>
-                      <span>{video.time}</span>
-                    </div>
+            <Link key={video.id} to={`/watch/${video.id}`}>
+              <Card className="bg-[#1F1F1F] border-[#303030] overflow-hidden hover:bg-[#2A2A2A] transition-all duration-200 cursor-pointer group">
+                <div className="relative">
+                  <img
+                    src={video.thumbnail}
+                    alt={video.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">
+                    {video.duration}
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+                <CardContent className="p-4">
+                  <div className="flex space-x-3">
+                    <Avatar className="w-10 h-10 flex-shrink-0">
+                      <AvatarImage src="/placeholder-avatar.jpg" />
+                      <AvatarFallback className="bg-red-600 text-white text-sm">
+                        {video.author[0]}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-white line-clamp-2 group-hover:text-gray-200">
+                        {video.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 mt-1">
+                        {video.author}
+                      </p>
+                      <div className="flex items-center space-x-2 text-xs text-gray-500 mt-1">
+                        <span>{video.views} просмотров</span>
+                        <span>•</span>
+                        <span>{video.time}</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </main>
